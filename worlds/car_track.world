@@ -1,0 +1,208 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+
+<!--
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+-->
+
+
+<model name="ground">
+      <pose>0 0 0 0 0 0</pose>
+      <static>1</static>
+      <link name="ground">
+        <collision name="ground_coll">
+          <geometry>
+            <box>
+              <size>83.6 150 0.05</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="ground_vis">
+          <geometry>
+            <box>
+              <size>83.6 150  0.05</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri> ./course.material </uri>  <!-- file://course.material -->
+              <name>course</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+   
+   
+   
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+
+<actor name="animated_box">
+        <link name="box_link">
+          <visual name="visual">
+            <geometry>
+              <box>
+                <size>2. 2. 2.</size>
+              </box>
+            </geometry>
+          </visual>
+        </link>
+        <script>
+          <loop>true</loop>
+          <auto_start>true</auto_start>
+          <trajectory id="0" type="square">
+             <waypoint>
+                <time>0.0</time>
+                <pose>-33 37 1 0 0 0</pose>
+             </waypoint>
+             <waypoint>
+                <time>10.0</time>
+                <pose>-23 37 1 0 0 0</pose>
+             </waypoint>
+             <waypoint>
+                <time>20.0</time>
+                <pose>-33 37 1 0 0 0</pose>
+             </waypoint>
+          </trajectory>
+        </script>
+      </actor>
+
+
+    <actor name="actor">
+      <skin>
+        <filename>file://media/models/walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <pose>0 0 0 0 0 0</pose>
+      <animation name="walking">
+        <filename>file://media/models/walk.dae</filename>
+        <scale>1.000000</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>0.000000</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0.0</time>
+            <pose>0 -63 0.5 0 0 -90</pose>
+          </waypoint>
+          <waypoint>
+            <time>10.0</time>
+            <pose>0 -53 0.5 0 0 90</pose>
+          </waypoint>
+          <waypoint>
+            <time>20.0</time>
+            <pose>0 -63 0.5 0 0 -90</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+
+    <!-- uphill -->
+    <model name="uphill">
+      <pose>-28.5 -9.8 0.5 0 -0.08 -1.57</pose>
+      <static>true</static>
+      
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 9 0.02</size>
+            </box>
+          </geometry>
+        </collision>
+        
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 9 0.02</size>
+            </box>
+          </geometry>
+            <material>
+              <script>
+                <uri> ./uphill.material </uri>
+                  <name>uphill</name>
+              </script>
+            </material>
+        </visual>
+      </link>
+    </model>
+
+
+    <!-- road -->
+    <model name="road">
+      <pose>-28.5 -17.1 0.9 0 0 -1.57</pose>
+      <static>true</static>
+      
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>5 9 0.02</size>
+            </box>
+          </geometry>
+        </collision>
+        
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5 9 0.02</size>
+            </box>
+          </geometry>
+	        <material>
+              <script>
+                <uri> ./downhill.material </uri>
+                  <name>downhill</name>
+              </script>
+           </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- downhill -->
+    <model name="downhill">
+      <pose>-28.5 -24.4 0.5 0 0.08 -1.57</pose>
+      <static>true</static>
+
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 9 0.02</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 9 0.02</size>
+            </box>
+          </geometry>
+	        <material>
+               <script>
+                 <uri> ./downhill.material </uri>
+                    <name>downhill</name>
+               </script>
+            </material>
+        </visual>
+      </link>
+    </model>
+     
+  </world>
+</sdf>
